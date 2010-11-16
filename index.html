@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-animation" content="text/html; charset=UTF-8">
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Expires" content="-1"/>
+
+		<title>jQuery Slidy - A Transition Plugin</title>
+
+		<link type="text/css" rel="stylesheet" href="css/jquery.slidy.css"/>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.slidy.min.js"></script>
+
+		<style type="text/css">
+			body {
+				font: 10px verdana;
+			}
+
+			a#coffee-link, div#coffee-container {
+				border-radius: 4px;
+				-khtml-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-opera-border-radius: 4px;
+				-webkit-border-radius: 4px;
+			}
+
+			div#link a {
+				color: #EA9C00;
+				font: bold 10px verdana;
+				letter-spacing: .9px;
+				text-decoration: none;
+			}
+			
+			div#link a:hover {
+				color: #DC5;
+				font-weight: bold;
+				letter-spacing: .9px;
+				text-decoration: underline;
+			}
+
+			a#coffee-link {
+				background: url('img/coffee.png') 6px 2px no-repeat;
+				border: 1px solid #D9C640;
+				color: #FFF;
+				display: block;
+				font-weight: bold;
+				letter-spacing: .9px;
+				padding: 4px 5px 4px 26px;
+				text-decoration: none;
+			}
+
+			a#coffee-link:hover {
+				text-decoration: underline;
+			}
+
+			div#coffee-container {
+				background-color: #DC5;
+				float: right;
+				margin-right: 15px;
+			}
+
+			div.description {
+				color: #555;
+				letter-spacing: .1px;
+				margin-bottom: 10px;
+				text-indent: 7px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div#link {
+				color: #AB9927;
+				text-indent: 7px;
+			}
+
+			div.notice {
+				font: 9px verdana;
+				color: #777;
+				letter-spacing: .1px;
+				margin-bottom: 3px;
+				text-indent: 7px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div.session {
+				font: bold 13px verdana;
+				border-bottom: 1px solid #EFEFEF;
+				color: #444;
+				letter-spacing: .7px;
+				margin-bottom: 10px;
+				margin-top: 24px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div.source, div.source-group {
+				background: #F8F8FF;
+				border: 1px solid #EFEFEF;
+				border-left: 3px solid #CCC;
+				color: #444;
+				font: 12px monospace;
+				letter-spacing: .1px;
+				margin-bottom: 7px;
+				margin-top: 5px;
+				padding: 7px;
+				width: 99%;
+			}
+
+			div.text {
+				color: #555;
+				letter-spacing: .1px;
+				margin-bottom: 20px;
+				margin-top: 5px;
+				text-align: left;
+				text-indent: 7px;
+				width: 99%;
+			}
+
+			div.title {
+				font: bold 17px verdana;
+				color: #269;
+				letter-spacing: .7px;
+				margin-bottom: 20px;
+				margin-top: 5px;
+				text-align: left;
+				width: 99%;
+			}
+			
+			span.comment-html, span.comment-script {
+				font: 12px monospace;
+				letter-spacing: .1px;
+				margin-bottom: 7px;
+				margin-top: 5px;
+			}
+
+			span.comment-html {
+				color: #5e85de;
+			}
+
+			span.comment-script {
+				color: #578F73;
+			}
+
+			span#version {
+				color: #777;
+				font: 10px verdana;
+			}
+
+			div.group {
+				float: left;
+				margin-right: 10px;
+			}
+
+			div.source-group {
+				margin-top: 125px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="title">jQuery Slidy - A Transition Plugin <span id="version">(current version: 0.1)</span></div>
+
+		<div id="link">
+			| <a href="http://github.com/downloads/wbotelhos/slidy/jquery.slidy-0.1.zip" target="_blank">Download</a> |
+			<a href="http://github.com/wbotelhos/slidy" target="_blank">Github</a> |
+			<a href="http://wbotelhos.com/slidy/changelog.txt" target="_blank">Change Log</a> |
+			<a href="http://wbotelhos.com/slidy/README.txt" target="_blank">Readme</a> |
+			<a href="http://wbotelhos.com/slidy/LICENSE.txt" target="_blank">Licence</a> |
+		</div>
+
+		<div id="coffee-container">
+			<a id="coffee-link" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=jQuery%20Slidy" target="_blank">buy me a coffee</a>
+		</div><br/>
+
+		<div class="text">jQuery <strong>Slidy</strong> is a plugin that generates a customizable transitions automatically.</div>
+
+		<div class="session">With default options:</div>
+		<div id="default">
+			<img src="img/image-1.jpg"/>
+			<img src="img/image-2.jpg"/>
+			<img src="img/image-3.jpg"/>
+		</div><br/>
+		
+		<div class="source">
+			$('#default').slidy();<br/><br/>
+			
+			&lt;div id="default"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
+			&lt;/div&gt;
+		</div>
+
+		<div class="session">With effect transition, pause animation and custom cursor:</div>
+		<div id="pause">
+			<img src="img/image-1.jpg"/>
+			<img src="img/image-2.jpg"/>
+			<img src="img/image-3.jpg"/>
+		</div><br/><br/>
+
+		<span class="comment-script">
+			- The types are: 'normal', 'fade' and 'slide'.
+		</span><br/><br/>
+
+		<div class="source">
+			$('#default').slidy({<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;&nbsp;'fade',<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;cursor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'wait',<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;pause:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true<br/>
+			});<br/><br/>
+			
+			&lt;div id="default"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
+			&lt;/div&gt;
+		</div>
+
+		<div class="session">With menu, custom children elements and time and speed control:</div>
+		<div id="menu">
+			<a href="#"><img src="img/image-1.jpg" title="Nature"/></a>
+			<a href="#"><img src="img/image-2.jpg" title="Animals"/></a>
+			<a href="#"><img src="img/image-3.jpg" title="Clime"/></a>
+		</div><br/><br/><br/><br/>
+
+		<span class="comment-script">
+			- If the option 'children' was an element &lt;a/&gt;, then the menu will takes the value of "href" as a link;<br/>
+			- Otherwise the "title" attribute will be takes.
+		</span><br/><br/>
+
+		<div class="source">
+			$('#menu').slidy({<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;&nbsp;'slide',<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;children:&nbsp;&nbsp;&nbsp;'a',<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;menu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;pause:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;speed:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;400,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4000<br/>
+			});<br/><br/>
+
+			&lt;div id="menu"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#">&lt;img src="img/image-1.jpg" title="Nature"/&gt;&lt;/a&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#">&lt;img src="img/image-2.jpg" title="Animals"/&gt;&lt;/a&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#">&lt;img src="img/image-3.jpg" title="Clime"/&gt;&lt;/a&gt;<br/>
+			&lt;/div&gt;
+		</div>
+
+		<div class="session">With a group of elements:</div>
+		<div class="group">
+			<img src="img/image-small-1.jpg"/>
+			<img src="img/image-small-2.jpg"/>
+			<img src="img/image-small-3.jpg"/>
+		</div>
+
+		<div class="group">
+			<img src="img/image-small-2.jpg"/>
+			<img src="img/image-small-3.jpg"/>
+			<img src="img/image-small-1.jpg"/>
+		</div>
+
+		<div class="group">
+			<img src="img/image-small-3.jpg"/>
+			<img src="img/image-small-1.jpg"/>
+			<img src="img/image-small-2.jpg"/>
+		</div>
+
+		<div class="source-group">
+			$('.group').slidy({<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;&nbsp;'fade',<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;97,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;240<br/>
+			});<br/><br/>
+
+			&lt;div class="group"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
+			&lt;/div&gt;<br/><br/>
+
+			&lt;div class="group"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
+			&lt;/div&gt;<br/><br/>
+
+			&lt;div class="group"&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
+			&lt;/div&gt;
+		</div>
+		
+		<div class="session">Default options:</div>
+
+		<div class="source">
+			children:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'img'
+		 	<div class="notice">The element in which the transition will be done.</div>
+
+			cursor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default'
+		 	<div class="notice">The type of cursor that will be displayed when it stops over the banner.</div>
+
+			height:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200
+		 	<div class="notice">Height in pixel of the image banner.</div>
+
+			menu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false
+		 	<div class="notice">Created automatically a menu.</div>
+
+			pause:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false
+		 	<div class="notice">Stop the transition when the mouse over the banner.</div>
+
+			speed:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;600
+		 	<div class="notice">Duration in milliseconds of transition animation effect.</div>
+
+			target:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;''
+		 	<div class="notice">Type of opening the link in the menu and the banner.</div>
+
+			time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3600
+		 	<div class="notice">Duration in milliseconds of transition of the banners.</div>
+
+			animation:&nbsp;&nbsp;&nbsp;&nbsp;'normal'
+		 	<div class="notice">Type of the animation effect. ['normal', 'fade' or 'slide']</div>
+
+			width:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500
+		 	<div class="notice">Width in pixel of the image banner.</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		$(function() {
+
+			$('#default').slidy();
+
+			$('#pause').slidy({
+				cursor:		'wait',
+				pause:		true,
+				animation:	'fade'
+			});
+
+			$('#menu').slidy({
+				children:	'a',
+				menu:		true,
+				pause:		true,
+				speed:		400,
+				time:		4000,
+				animation:	'',
+				width:		640,
+				height:		255
+			});
+
+			$('.group').slidy({
+				height:		97,
+				animation:	'fade',
+				width:		240
+			});
+
+		});
+	</script>
+</html>
