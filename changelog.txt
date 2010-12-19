@@ -3,9 +3,9 @@
  * --------------------------------------------------------------------------
  *
  * 0.1
- *  - Option to choose the the element in which the transition will be done.;
+ *  - Option to choose the the element in which the transition will be done;
  *  - Option to choose the type of cursor that will be displayed when it stops over the banner;
- *  - Option to choose the height in pixel of the image banner.;
+ *  - Option to choose the height in pixel of the image banner;
  *  - Option to enable the creation of a menu automatically;
  *  - Option to enable the stop transition when the mouse over the banner;
  *  - Option to change the duration in milliseconds of transition animation effect;
