@@ -32,7 +32,7 @@
 		var options = $.extend({}, $.fn.slidy.defaults, settings);
 
 		if (this.length == 0) {
-			debug('Invalid selector!');
+			debug('Selector invalid or missing!');
 			return;
 		} else if (this.length > 1) {
 			return this.each(function() {
@@ -40,9 +40,12 @@
 			});
 		}
 
-		$global = $(this);
+		var $this		= $(this),
+			elements	= $this.children(options.children),
+			timer		= 0,
+			isAnimate	= false;
 
-		$global.css({
+		$this.css({
 			'cursor':	options.cursor,
 			'height':	options.height + 'px',
 			'overflow':	'hidden',
@@ -50,19 +53,14 @@
 			'width':	options.width + 'px'
 		});
 
-		var elements	= $global.children(options.children),
-			$this		= $global,
-			timer		= 0,
-			isAnimate	= false;
-
 		elements.each(function(i) {
 			$(this)
 			.css({ 'position': 'absolute', 'z-index': elements.length - i })
-			.attr('id', $global.attr('id') + '-' + (i + 1))
+			.attr('id', $this.attr('id') + '-' + (i + 1))
 			.hide();
 		});
 
-		$global
+		$this
 			.find('img')
 			.attr({ height: options.height, width: options.width });
 
@@ -127,7 +125,7 @@
 				menu += '<li><a href="' + parent.attr(parent.is('a') ? 'href' : 'title') + '" ' + target + '>' + img.attr('title') + '</a></li>';
 			});
 
-			$global.after('<ul class="slidy-menu">' + menu + '</ul>');
+			$this.after('<ul class="slidy-menu">' + menu + '</ul>');
 
 			var space	= parseInt((options.width / imgs.length) + (imgs.length - 1)),
 				diff	= options.width - (space * imgs.length),
@@ -143,7 +141,7 @@
 		}
 
 		if (options.pause) {
-			$global.hover(stop, start);
+			$this.hover(stop, start);
 		}
 
 		function go(elements, options, index, isBanner) {
@@ -195,7 +193,7 @@
 						.eq(index).addClass('slidy-link-selected');
 		};
 
-		return $global;
+		return $this;
 	};
 
 	function debug(message) {
@@ -205,6 +203,7 @@
 	};
 
 	$.fn.slidy.defaults = {
+		animation:	'normal',
 		children:	'img',
 		cursor:		'default',
 		height:		200,
@@ -213,7 +212,6 @@
 		speed:		600,
 		target:		'',
 		time:		3600,
-		animation:	'normal',
 		width:		500
 	};
 
