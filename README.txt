@@ -6,7 +6,7 @@
  *
  * Licensed under The MIT License
  * 
- * @version     0.1
+ * @version     0.1.0
  * @since       11.16.2010
  * @author      Washington Botelho dos Santos
  * @link        http://wbotelhos.com/slidy
@@ -16,6 +16,7 @@
  * 
  * Default values:
  * --------------------------------------------------------------------------
+ * animation:  'normal'             // Type of the animation effect. ['normal', 'fade' or 'slide']
  * children:   'img'                // The element in which the transition will be done.
  * cursor:     'default'            // The type of cursor that will be displayed when it stops over the banner.
  * height:     200                  // Height in pixel of the image banner.
@@ -24,7 +25,6 @@
  * speed:      600                  // Duration in milliseconds of transition animation effect.
  * target:     ''                   // Type of opening the link in the menu and the banner.
  * time:       3600                 // Duration in milliseconds of transition of the banners.
- * animation:  'normal'             // Type of the animation effect. ['normal', 'fade' or 'slide']
  * width:      500                  // Width in pixel of the image banner.
  *
  * Usage with default values:
