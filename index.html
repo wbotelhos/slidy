@@ -3,8 +3,6 @@
 <html>
 	<head>
 		<meta http-equiv="Content-animation" content="text/html; charset=UTF-8">
-		<meta http-equiv="Pragma" content="no-cache"/>
-		<meta http-equiv="Expires" content="-1"/>
 
 		<title>jQuery Slidy - A Transition Plugin</title>
 
@@ -160,7 +158,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="title">jQuery Slidy - A Transition Plugin <span id="version">(current version: 0.1)</span></div>
+		<div class="title">jQuery Slidy - A Transition Plugin <span id="version">(current version: 0.1.0)</span></div>
 
 		<div id="link">
 			| <a href="http://github.com/downloads/wbotelhos/slidy/jquery.slidy-0.1.zip" target="_blank">Download</a> |
@@ -205,13 +203,13 @@
 		</span><br/><br/>
 
 		<div class="source">
-			$('#default').slidy({<br/>
+			$('#pause').slidy({<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;&nbsp;'fade',<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;cursor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'wait',<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;pause:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true<br/>
 			});<br/><br/>
 			
-			&lt;div id="default"&gt;<br/>
+			&lt;div id="pause"&gt;<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-1.jpg"/&gt;<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-2.jpg"/&gt;<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="image-3.jpg"/&gt;<br/>
@@ -295,6 +293,9 @@
 		<div class="session">Default options:</div>
 
 		<div class="source">
+			animation:&nbsp;&nbsp;&nbsp;&nbsp;'normal'
+		 	<div class="notice">Type of the animation effect. ['normal', 'fade' or 'slide']</div>
+
 			children:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'img'
 		 	<div class="notice">The element in which the transition will be done.</div>
 
@@ -319,9 +320,6 @@
 			time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3600
 		 	<div class="notice">Duration in milliseconds of transition of the banners.</div>
 
-			animation:&nbsp;&nbsp;&nbsp;&nbsp;'normal'
-		 	<div class="notice">Type of the animation effect. ['normal', 'fade' or 'slide']</div>
-
 			width:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500
 		 	<div class="notice">Width in pixel of the image banner.</div>
 		</div>
@@ -333,25 +331,25 @@
 			$('#default').slidy();
 
 			$('#pause').slidy({
+				animation:	'fade',
 				cursor:		'wait',
-				pause:		true,
-				animation:	'fade'
+				pause:		true
 			});
 
 			$('#menu').slidy({
+				animation:	'slide',
 				children:	'a',
 				menu:		true,
 				pause:		true,
 				speed:		400,
 				time:		4000,
-				animation:	'',
 				width:		640,
 				height:		255
 			});
 
 			$('.group').slidy({
-				height:		97,
 				animation:	'fade',
+				height:		97,
 				width:		240
 			});
 
