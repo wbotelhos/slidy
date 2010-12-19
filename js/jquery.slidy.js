@@ -6,13 +6,13 @@
  *
  * Licensed under The MIT License
  *
- * @version			0.1
- * @since			11.16.2010
- * @author			Washington Botelho dos Santos
- * @documentation	wbotelhos.com/slidy
- * @twitter			twitter.com/wbotelhos
- * @license			opensource.org/licenses/mit-license.php MIT
- * @package			jQuery Plugins
+ * @version         0.1.0
+ * @since           11.16.2010
+ * @author          Washington Botelho dos Santos
+ * @documentation   wbotelhos.com/slidy
+ * @twitter         twitter.com/wbotelhos
+ * @license         opensource.org/licenses/mit-license.php MIT
+ * @package         jQuery Plugins
  *
  * Usage with default values:
  * ---------------------------------------------------------------------------------
