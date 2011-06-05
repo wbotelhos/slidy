@@ -127,11 +127,17 @@
 				menu += '<li><a href="' + parent.attr(parent.is('a') ? 'href' : 'title') + '" ' + target + '>' + img.attr('title') + '</a></li>';
 			});
 
-			$this.after('<ul id="' + id + '-slidy-menu" class="slidy-menu">' + menu + '</ul>');
+			var $menu = $('<ul/>', {
+							id:			id + '-slidy-menu',
+							'class':	'slidy-menu',
+							html:		menu
+						});
+
+			$this.after($menu);
 
 			var	space	= parseInt((opt.width / quantity) + (quantity - 1)),
 				diff	= opt.width - (space * quantity),
-				links	= $('ul.slidy-menu').children('li');
+				links	= $menu.children('li');
 
 			links
 			.css('width', space)
