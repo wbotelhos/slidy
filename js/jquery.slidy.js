@@ -77,12 +77,12 @@
 
 		elements.hide().first().show();
 
-		go(elements, opt, 0);
+		if (opt.menu) {
+			$menu = $('<ul/>', { id: id + '-slidy-menu', 'class': 'slidy-menu' }).insertAfter($this);
+		}
 
 		var stop = function() {
-			var target = $(this),
-				index,
-				last;
+			var target = $(this), index, last;
 
 			clearTimeout(timer);
 
@@ -90,7 +90,7 @@
 				index	= target.index();
 				last	= target.parent().children('.slidy-link-selected').index();
 			} else {
-				index	= $this.next('ul').children('.slidy-link-selected').index();
+				index	= $menu.children('.slidy-link-selected').index();
 				last	= index;
 			}
 
@@ -103,7 +103,7 @@
 				change(elements, opt, index, last);
 			}
 		}, start = function() {
-			var index	= $this.next('ul').children('.slidy-link-selected').index(),
+			var index	= $menu.children('.slidy-link-selected').index(),
 				isBanner; // Avoid hover the same li again.
 
 			// Is not used element.index() because the delay effect can be select another is not the same of cursor over.
@@ -115,8 +115,8 @@
 		};
 
 		if (opt.menu) {
-			var menu	= '',
-				target	= (opt.target != '') ? 'target="' + opt.target + '"' : '',
+			var target	= (opt.target != '') ? 'target="' + opt.target + '"' : '',
+				menu	= '',
 				parent,
 				img;
 
@@ -127,13 +127,7 @@
 				menu += '<li><a href="' + parent.attr(parent.is('a') ? 'href' : 'title') + '" ' + target + '>' + img.attr('title') + '</a></li>';
 			});
 
-			var $menu = $('<ul/>', {
-							id:			id + '-slidy-menu',
-							'class':	'slidy-menu',
-							html:		menu
-						});
-
-			$this.after($menu);
+			$menu.html(menu);
 
 			var	space	= parseInt((opt.width / quantity) + (quantity - 1)),
 				diff	= opt.width - (space * quantity),
@@ -147,6 +141,8 @@
 			.end()
 				.last().css({ 'border-right': '0', 'width': (space + diff) - (quantity - 1) });
 		}
+
+		go(elements, opt, 0);
 
 		if (opt.pause) {
 			$this.hover(stop, start);
