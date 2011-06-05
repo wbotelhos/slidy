@@ -6,7 +6,7 @@
  *
  * Licensed under The MIT License
  *
- * @version         0.1.0
+ * @version         0.2.0
  * @since           11.16.2010
  * @author          Washington Botelho dos Santos
  * @documentation   wbotelhos.com/slidy
@@ -29,8 +29,6 @@
 ;(function($) {
 
 	$.fn.slidy = function(settings) {
-		var options = $.extend({}, $.fn.slidy.defaults, settings);
-
 		if (this.length == 0) {
 			debug('Selector invalid or missing!');
 			return;
@@ -40,17 +38,21 @@
 			});
 		}
 
-		var $this		= $(this),
-			elements	= $this.children(options.children),
+		var opt			= $.extend({}, $.fn.slidy.defaults, settings),
+			$this		= $(this),
+			id			= this.attr('id'),
+			elements	= $this.children(opt.children),
 			timer		= 0,
 			isAnimate	= false;
 
-		$this.css({
-			'cursor':	options.cursor,
-			'height':	options.height + 'px',
+		$this
+		.data('options', opt)
+		.css({
+			'cursor':	opt.cursor,
+			'height':	opt.height + 'px',
 			'overflow':	'hidden',
 			'position':	'relative',
-			'width':	options.width + 'px'
+			'width':	opt.width + 'px'
 		});
 
 		elements.each(function(i) {
@@ -62,10 +64,10 @@
 
 		$this
 			.find('img')
-			.attr({ height: options.height, width: options.width });
+			.attr({ height: opt.height, width: opt.width });
 
-		if (options.children == 'a' && options.target != '') {
-			elements.attr('target',	options.target);
+		if (opt.children == 'a' && opt.target != '') {
+			elements.attr('target',	opt.target);
 		}
 
 		elements
@@ -73,7 +75,7 @@
 		.end()
 			.find('img').css('border', '0');
 
-		go(elements, options, 0);
+		go(elements, opt, 0);
 
 		var stop = function() {
 			var target = $(this),
@@ -96,10 +98,9 @@
 						.children()
 							.eq(last).removeClass('slidy-link-selected');
 
-				change(elements, options, index, last);
+				change(elements, opt, index, last);
 			}
-		},
-		start = function() {
+		}, start = function() {
 			var index	= $this.next('ul').children('.slidy-link-selected').index(),
 				isBanner; // Avoid hover the same li again.
 
@@ -108,27 +109,27 @@
 				isBanner = true;
 			}
 
-			go(elements, options, index, isBanner);
+			go(elements, opt, index, isBanner);
 		};
 
-		if (options.menu) {
+		if (opt.menu) {
 			var imgs	= elements.find('img'),
 				menu	= '',
-				target	= (options.target != '') ? 'target="' + options.target + '"' : '',
+				target	= (opt.target != '') ? 'target="' + opt.target + '"' : '',
 				parent,
 				img;
 
 			imgs.each(function() {
 				img		= $(this);
-				parent	= img.parent(options.children);
+				parent	= img.parent(opt.children);
 
 				menu += '<li><a href="' + parent.attr(parent.is('a') ? 'href' : 'title') + '" ' + target + '>' + img.attr('title') + '</a></li>';
 			});
 
 			$this.after('<ul class="slidy-menu">' + menu + '</ul>');
 
-			var space	= parseInt((options.width / imgs.length) + (imgs.length - 1)),
-				diff	= options.width - (space * imgs.length),
+			var space	= parseInt((opt.width / imgs.length) + (imgs.length - 1)),
+				diff	= opt.width - (space * imgs.length),
 				links	= $('ul.slidy-menu').children('li');
 
 			links
@@ -140,12 +141,12 @@
 				.last().css({ 'border-right': '0', 'width': (space + diff) - (imgs.length - 1) });
 		}
 
-		if (options.pause) {
+		if (opt.pause) {
 			$this.hover(stop, start);
 		}
 
-		function go(elements, options, index, isBanner) {
-			change(elements, options, index, index - 1);
+		function go(elements, opt, index, isBanner) {
+			change(elements, opt, index, index - 1);
 
 			if (isBanner == undefined) {
 				selectMenu(index);
@@ -154,26 +155,26 @@
 			index = (index < elements.length - 1) ? index + 1 : 0;
 
 			timer =	setTimeout(function() {
-						go(elements, options, index);
-					}, options.time);
+						go(elements, opt, index);
+					}, opt.time);
 		};
 
-		function change(elements, options, index, last) {
+		function change(elements, opt, index, last) {
 			if (!isAnimate) {
 				isAnimate = true;
 
-				if (options.animation == 'fade') {
-					elements.eq(last).fadeOut(options.speed);
-					elements.eq(index).fadeIn(options.speed, function() {
+				if (opt.animation == 'fade') {
+					elements.eq(last).fadeOut(opt.speed);
+					elements.eq(index).fadeIn(opt.speed, function() {
 						selectMenu(index);
 						isAnimate = false;
 					});
-				} else if (options.animation == 'slide') {
+				} else if (opt.animation == 'slide') {
 					elements
 					.css('z-index', 0)
 						.eq(index)
 						.css('z-index', elements.length)
-						.slideDown(options.speed, function() {
+						.slideDown(opt.speed, function() {
 							elements.eq(last).hide();
 							selectMenu(index);
 							isAnimate = false;
