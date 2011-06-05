@@ -82,36 +82,30 @@
 		}
 
 		var stop = function() {
-			var target = $(this), index, last;
-
 			clearTimeout(timer);
+		}, stopMenu = function(thiz) {
+			var $this		= $(this),
+				index		= $this.index(),
+				$current	= $this.parent().children('.slidy-link-selected'),
+				last		= $current.index();
 
-			if (target.is('li')) {
-				index	= target.index();
-				last	= $menu.children('.slidy-link-selected').index();
-			} else {
-				last	= $menu.children('.slidy-link-selected').index();
-				index	= last;
-			}
+			stop();
 
 			if (index != last) {
-				target.addClass('slidy-link-selected')
-					.parent()
-						.children()
-							.eq(last).removeClass('slidy-link-selected');
+				$current.removeClass('slidy-link-selected');
+				$this.addClass('slidy-link-selected');
 
-				change(elements, opt, index, last);
+				change(last, index);
 			}
-		}, start = function() {
-			var index	= $menu.children('.slidy-link-selected').index(),
-				isBanner; // Avoid hover the same li again.
+		}, start = function(thiz) {
+			go($(thiz.target).parent('a').index());
+		}, startMenu = function() {
+			var $this		= $(this),
+				index		= $this.index(),
+				$current	= $this.parent().children('.slidy-link-selected'),
+				last		= $current.index();
 
-			// Is not used element.index() because the delay effect can be select another is not the same of cursor over.
-			if (!$(this).is('li')) {
-				isBanner = true;
-			}
-
-			go(elements, opt, index, isBanner);
+			go(last);
 		};
 
 		if (opt.menu) {
@@ -133,36 +127,50 @@
 				diff	= opt.width - (space * quantity),
 				links	= $menu.children('li');
 
-			links
-			.css('width', space)
-			.hover(stop, start)
-			.mousemove(stop) // To fix the delay of the effect and moviment of cursor. Avoid mouseout and mouseover again to change. Overhead?
+			links.css('width', space).mouseenter(stopMenu).mouseleave(startMenu)
 				.first().addClass('slidy-link-selected')
 			.end()
 				.last().css({ 'border-right': '0', 'width': (space + diff) - (quantity - 1) });
+			
+			if (opt.animation == 'slide') {
+				links.mousemove(function() {
+					var $this = $(this);
+
+					if (!$this.hasClass('slidy-link-selected')) {
+						$this.mouseenter();
+					}
+				});
+			}
 		}
 
-		go(elements, opt, 0);
+		go(0);
 
 		if (opt.pause) {
-			$this.hover(stop, start);
+			$this.mouseenter(stop).mouseleave(start);
 		}
 
-		function go(elements, opt, index, isBanner) {
-			change(elements, opt, index, index - 1);
+		function go(index) {
+			var total	= quantity - 1,
+				last	= null;
 
-			if (isBanner == undefined) {
-				selectMenu(index);
+			if (index > total) {
+				index = 0;
+				last = total;
+			} else if (index <= 0) {
+				index = 0;
+				last = total;
+			} else {
+				last = index - 1;
 			}
 
-			index = (index < quantity - 1) ? index + 1 : 0;
+			change(last, index);
 
 			timer =	setTimeout(function() {
-						go(elements, opt, index);
-					}, opt.time);
-		};
+					go(++index);
+				}, opt.time);
+		}
 
-		function change(elements, opt, index, last) {
+		function change(last, index) {
 			if (!isAnimate) {
 				isAnimate = true;
 
@@ -175,21 +183,20 @@
 							isAnimate = false;
 						});
 				} else if (opt.animation == 'slide') {
-					elements
-					.css('z-index', 0)
-						.eq(index)
-						.css('z-index', quantity)
-						.slideDown(opt.speed, function() {
+					elements.css('z-index', 0)
+						.eq(index).css('z-index', quantity).slideDown(opt.speed, function() {
 							elements.eq(last).hide();
 							selectMenu(index);
 							isAnimate = false;
 						});
 				} else {
 					elements
-						.eq(last).hide()
+					.eq(last).hide()
 					.end()
-						.eq(index).show();
-					isAnimate = false;
+					.eq(index).show(0, function() {
+						selectMenu(index);
+						isAnimate = false;
+					});
 				}
 			}
 		};
