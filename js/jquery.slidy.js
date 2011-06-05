@@ -83,13 +83,15 @@
 
 		var stop = function() {
 			clearTimeout(timer);
-		}, stopMenu = function(thiz) {
+		}, overBanner = function() {
+			stop();
+		}, overMenu = function(thiz) {
+			stop();
+
 			var $this		= $(this),
 				index		= $this.index(),
 				$current	= $this.parent().children('.slidy-link-selected'),
 				last		= $current.index();
-
-			stop();
 
 			if (index != last) {
 				$current.removeClass('slidy-link-selected');
@@ -97,15 +99,29 @@
 
 				change(last, index);
 			}
-		}, start = function(thiz) {
+		}, outBanner = function(thiz) {
 			go($(thiz.target).parent('a').index());
-		}, startMenu = function() {
+		}, outMenu = function() {
 			var $this		= $(this),
 				index		= $this.index(),
 				$current	= $this.parent().children('.slidy-link-selected'),
 				last		= $current.index();
 
 			go(last);
+		}, clickMenu = function(thiz) {
+			stop();
+
+			var $this		= $(this),
+				index		= $this.index(),
+				$current	= $this.parent().children('.slidy-link-selected'),
+				last		= $current.index();
+
+			if (index != last) {
+				$current.removeClass('slidy-link-selected');
+				$this.addClass('slidy-link-selected');
+			}
+
+			go(index);
 		};
 
 		if (opt.menu) {
@@ -127,7 +143,16 @@
 				diff	= opt.width - (space * quantity),
 				links	= $menu.children('li');
 
-			links.css('width', space).mouseenter(stopMenu).mouseleave(startMenu)
+			if (opt.action == 'mouseenter') {
+				links.mouseenter(overMenu).mouseleave(outMenu);	
+			} else if (opt.action == 'click') {
+				links.click(clickMenu);
+			} else {
+				debug('action attribute must to be "click" or "mouseenter"!');
+				return;
+			}
+
+			links.css('width', space)
 				.first().addClass('slidy-link-selected')
 			.end()
 				.last().css({ 'border-right': '0', 'width': (space + diff) - (quantity - 1) });
@@ -146,7 +171,7 @@
 		go(0);
 
 		if (opt.pause) {
-			$this.mouseenter(stop).mouseleave(start);
+			$this.mouseenter(overBanner).mouseleave(outBanner);
 		}
 
 		function go(index) {
@@ -220,6 +245,7 @@
 	};
 
 	$.fn.slidy.defaults = {
+		action:		'mouseenter',
 		animation:	'normal',
 		children:	'img',
 		cursor:		'default',
