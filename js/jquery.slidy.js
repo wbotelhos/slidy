@@ -199,10 +199,12 @@
 		};
 
 		function selectMenu(index) {
-			$this
-				.next('ul.slidy-menu')
-					.children().removeClass('slidy-link-selected')
-						.eq(index).addClass('slidy-link-selected');
+			if (opt.menu) {
+				$this
+					.next('ul.slidy-menu')
+						.children().removeClass('slidy-link-selected')
+							.eq(index).addClass('slidy-link-selected');
+			}
 		};
 
 		return $this;
