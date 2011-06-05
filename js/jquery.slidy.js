@@ -45,6 +45,11 @@
 			timer		= 0,
 			isAnimate	= false;
 
+		if (id === undefined) {
+			id = 'slidy-' + $this.index();
+			$this.attr('id', id); 
+		}
+
 		$this
 		.data('options', opt)
 		.css({
