@@ -29,6 +29,7 @@
 ;(function($) {
 
 	$.fn.slidy = function(settings) {
+
 		if (this.length == 0) {
 			debug('Selector invalid or missing!');
 			return;
@@ -42,6 +43,8 @@
 			$this		= $(this),
 			id			= this.attr('id'),
 			elements	= $this.children(opt.children),
+			quantity	= elements.length,
+			images		= (opt.children == 'img') ? elements : elements.find('img'),
 			timer		= 0,
 			isAnimate	= false;
 
@@ -62,23 +65,17 @@
 
 		elements.each(function(i) {
 			$(this)
-			.css({ 'position': 'absolute', 'z-index': elements.length - i })
-			.attr('id', $this.attr('id') + '-' + (i + 1))
-			.hide();
+			.css({ 'position': 'absolute', 'z-index': quantity - i })
+			.attr('id', $this.attr('id') + '-' + (i + 1));
 		});
 
-		$this
-			.find('img')
-			.attr({ height: opt.height, width: opt.width });
+		images.attr({ height: opt.height, width: opt.width }).css('border', '0');
 
 		if (opt.children == 'a' && opt.target != '') {
 			elements.attr('target',	opt.target);
 		}
 
-		elements
-			.first().show()
-		.end()
-			.find('img').css('border', '0');
+		elements.hide().first().show();
 
 		go(elements, opt, 0);
 
@@ -118,23 +115,22 @@
 		};
 
 		if (opt.menu) {
-			var imgs	= elements.find('img'),
-				menu	= '',
+			var menu	= '',
 				target	= (opt.target != '') ? 'target="' + opt.target + '"' : '',
 				parent,
 				img;
 
-			imgs.each(function() {
+			images.each(function() {
 				img		= $(this);
 				parent	= img.parent(opt.children);
 
 				menu += '<li><a href="' + parent.attr(parent.is('a') ? 'href' : 'title') + '" ' + target + '>' + img.attr('title') + '</a></li>';
 			});
 
-			$this.after('<ul class="slidy-menu">' + menu + '</ul>');
+			$this.after('<ul id="' + id + '-slidy-menu" class="slidy-menu">' + menu + '</ul>');
 
-			var space	= parseInt((opt.width / imgs.length) + (imgs.length - 1)),
-				diff	= opt.width - (space * imgs.length),
+			var	space	= parseInt((opt.width / quantity) + (quantity - 1)),
+				diff	= opt.width - (space * quantity),
 				links	= $('ul.slidy-menu').children('li');
 
 			links
@@ -143,7 +139,7 @@
 			.mousemove(stop) // To fix the delay of the effect and moviment of cursor. Avoid mouseout and mouseover again to change. Overhead?
 				.first().addClass('slidy-link-selected')
 			.end()
-				.last().css({ 'border-right': '0', 'width': (space + diff) - (imgs.length - 1) });
+				.last().css({ 'border-right': '0', 'width': (space + diff) - (quantity - 1) });
 		}
 
 		if (opt.pause) {
@@ -157,7 +153,7 @@
 				selectMenu(index);
 			}
 
-			index = (index < elements.length - 1) ? index + 1 : 0;
+			index = (index < quantity - 1) ? index + 1 : 0;
 
 			timer =	setTimeout(function() {
 						go(elements, opt, index);
@@ -169,24 +165,28 @@
 				isAnimate = true;
 
 				if (opt.animation == 'fade') {
-					elements.eq(last).fadeOut(opt.speed);
-					elements.eq(index).fadeIn(opt.speed, function() {
-						selectMenu(index);
-						isAnimate = false;
-					});
+					elements
+						.eq(last).fadeOut(opt.speed)
+					.end()
+						.eq(index).fadeIn(opt.speed, function() {
+							selectMenu(index);
+							isAnimate = false;
+						});
 				} else if (opt.animation == 'slide') {
 					elements
 					.css('z-index', 0)
 						.eq(index)
-						.css('z-index', elements.length)
+						.css('z-index', quantity)
 						.slideDown(opt.speed, function() {
 							elements.eq(last).hide();
 							selectMenu(index);
 							isAnimate = false;
 						});
 				} else {
-					elements.eq(last).hide();
-					elements.eq(index).show();
+					elements
+						.eq(last).hide()
+					.end()
+						.eq(index).show();
 					isAnimate = false;
 				}
 			}
@@ -194,7 +194,7 @@
 
 		function selectMenu(index) {
 			$this
-				.next('ul')
+				.next('ul.slidy-menu')
 					.children().removeClass('slidy-link-selected')
 						.eq(index).addClass('slidy-link-selected');
 		};
