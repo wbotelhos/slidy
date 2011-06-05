@@ -132,7 +132,7 @@
 			.end()
 				.last().css({ 'border-right': '0', 'width': (space + diff) - (quantity - 1) });
 			
-			if (opt.animation == 'slide') {
+			if (opt.animation == 'slide' || opt.animation == 'fade') {
 				links.mousemove(function() {
 					var $this = $(this);
 
