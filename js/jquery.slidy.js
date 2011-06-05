@@ -88,10 +88,10 @@
 
 			if (target.is('li')) {
 				index	= target.index();
-				last	= target.parent().children('.slidy-link-selected').index();
+				last	= $menu.children('.slidy-link-selected').index();
 			} else {
-				index	= $menu.children('.slidy-link-selected').index();
-				last	= index;
+				last	= $menu.children('.slidy-link-selected').index();
+				index	= last;
 			}
 
 			if (index != last) {
