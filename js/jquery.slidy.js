@@ -16,9 +16,9 @@
  *
  * Usage with default values:
  * ---------------------------------------------------------------------------------
- * $('#default').slidy();
+ * $('#banner').slidy();
  *
- * <div id="default">
+ * <div id="banner">
  *   <img src="image-1.jpg"/>
  *   <img src="image-2.jpg"/>
  *   <img src="image-3.jpg"/>

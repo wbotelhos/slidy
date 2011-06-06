@@ -6,7 +6,7 @@
  *
  * Licensed under The MIT License
  * 
- * @version     0.1.0
+ * @version     0.2.0
  * @since       11.16.2010
  * @author      Washington Botelho dos Santos
  * @link        http://wbotelhos.com/slidy
@@ -16,7 +16,8 @@
  * 
  * Default values:
  * --------------------------------------------------------------------------
- * animation:  'normal'             // Type of the animation effect. ['normal', 'fade' or 'slide']
+ * acation:    'mouseenter'         // Action to change the slide ('mouseenter', 'fade' or 'slide').
+ * animation:  'normal'             // Type of the animation effect ('normal', 'fade' or 'slide').
  * children:   'img'                // The element in which the transition will be done.
  * cursor:     'default'            // The type of cursor that will be displayed when it stops over the banner.
  * height:     200                  // Height in pixel of the image banner.
@@ -30,9 +31,9 @@
  * Usage with default values:
  * --------------------------------------------------------------------------
  *
- * $('#default').slidy();
+ * $('#banner').slidy();
  *
- * <div id="default">
+ * <div id="banner">
  *   <img src="image-1.jpg"/>
  *   <img src="image-2.jpg"/>
  *   <img src="image-3.jpg"/>

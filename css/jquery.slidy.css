@@ -26,7 +26,7 @@ ul.slidy-menu li a {
 	text-decoration: none;
 }
 
-ul li.slidy-link-selected a {
+ul.slidy-menu li.slidy-link-selected a {
 	background-color: #353535;
 	color: #FFFBDE;
 	text-shadow: #444 1px 1px;
