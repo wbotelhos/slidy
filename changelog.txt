@@ -2,8 +2,13 @@
  * jQuery Slidy - A Transition Plugin - http://wbotelhos.com/slidy
  * --------------------------------------------------------------------------
  *
- * 0.1
- *  - Option to choose the the element in which the transition will be done;
+ * 0.2.0
+ *  - Added attribute 'action' to change the slide using ('mouseenter' or 'click');
+ *  - Options now is local and keeped as data to future usage;
+ *  - Slidy will receive an ID automatically if it does not has one.
+ *
+ * 0.1.0
+ *  - Option to choose the element in which the transition will be executed;
  *  - Option to choose the type of cursor that will be displayed when it stops over the banner;
  *  - Option to choose the height in pixel of the image banner;
  *  - Option to enable the creation of a menu automatically;
@@ -11,7 +16,7 @@
  *  - Option to change the duration in milliseconds of transition animation effect;
  *  - Option to change the type of opening the link in the menu and the banner;
  *  - Option to change the duration in milliseconds of transition of the banners;
- *  - Option to change the type of the animation effect. ['normal', 'fade' or 'slide'];
+ *  - Option to change the type of the animation effect ('normal', 'fade' or 'slide');
  *  - Option to choose the width in pixel of the image banner.
  *
  */
