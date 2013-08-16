@@ -119,9 +119,9 @@
 			if (index != last) {
 				$current.removeClass('slidy-link-selected');
 				$this.addClass('slidy-link-selected');
-			}
 
-			go(index);
+				change(last, index);
+			}
 		};
 
 		if (opt.menu) {
@@ -223,6 +223,8 @@
 						isAnimate = false;
 					});
 				}
+
+                opt.callback(last, index);
 			}
 		};
 
@@ -247,6 +249,7 @@
 	$.fn.slidy.defaults = {
 		action:		'mouseenter',
 		animation:	'normal',
+        callback:   null,
 		children:	'img',
 		cursor:		'default',
 		height:		200,
